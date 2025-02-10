@@ -1,0 +1,66 @@
+server:
+  port: 8081
+
+spring:
+  profiles:
+    active: dev
+  main:
+    allow-circular-references: true
+  datasource:
+    druid:
+      driver-class-name: ${howwelike.datasource.driver-class-name}
+      url: jdbc:mysql://${howwelike.datasource.host}:${howwelike.datasource.port}/${howwelike.datasource.database}?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
+      username: ${howwelike.datasource.username}
+      password: ${howwelike.datasource.password}
+
+  redis:
+    host: ${howwelike.redis.host}
+    port: ${howwelike.redis.port}
+    password: ${howwelike.redis.password}
+    database: ${howwelike.redis.database}
+
+
+mybatis:
+  #mapper配置文件
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.howwelike.entity
+  configuration:
+    #开启驼峰命名
+    map-underscore-to-camel-case: true
+
+logging:
+  level:
+    com:
+      howwelike:
+        mapper: debug
+        service: info
+        controller: info
+
+howwelike:
+  jwt:
+    # 设置jwt签名加密时使用的秘钥
+    admin-secret-key: itxuexi
+    # 设置jwt过期时间
+    admin-ttl: 7200000
+    # 设置前端传递过来的令牌名称
+    admin-token-name: token
+    user-secret-key: itxuexi2024
+    user-ttl: 7200000
+    user-token-name: authentication
+
+  alioss:
+    endpoint: ${howwelike.alioss.endpoint}
+    access-key-id: ${howwelike.alioss.access-key-id}
+    access-key-secret: ${howwelike.alioss.access-key-secret}
+    bucket-name: ${howwelike.alioss.bucket-name}
+
+  wechat:
+    appid: ${howwelike.wechat.appid}
+    secret: ${howwelike.wechat.secret}
+    mchid: ${howwelike.wechat.mchid}
+    mchSerialNo: ${howwelike.wechat.mchSerialNo}
+    privateKeyFilePath: ${howwelike.wechat.privateKeyFilePath}
+    apiV3Key: ${howwelike.wechat.apiV3Key}
+    weChatPayCertFilePath: ${howwelike.wechat.weChatPayCertFilePath}
+    notifyUrl: ${howwelike.wechat.notifyUrl}
+    refundNotifyUrl: ${howwelike.wechat.refundNotifyUrl}
